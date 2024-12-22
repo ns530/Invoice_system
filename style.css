@@ -13,10 +13,13 @@ header{
     background-color: var(--header-background_color);
 }
 
-/* footer{
+hr{
+    color: var(--header-background_color);
+}
+footer{
     left: 0;
     bottom: 0;
     width: 100vw;
     height: 30vh;
     background-color: var(--header-background_color);
-} */
+}
