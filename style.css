@@ -1,0 +1,22 @@
+:root{
+    --header-background_color: #16641e;
+    --background_color: #fff;
+}
+
+body{
+    background-color: var(--background_color);
+}
+
+header{
+    width: 100vw;
+    height: 20vh;
+    background-color: var(--header-background_color);
+}
+
+/* footer{
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 30vh;
+    background-color: var(--header-background_color);
+} */
