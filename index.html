@@ -20,6 +20,7 @@
       crossorigin="anonymous"
     />
     <!-- Bootstrap CSS -->
+
   </head>
   <body>
     <header></header>
@@ -47,17 +48,18 @@
               class="form-control"
               id="customer-num"
               aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
-            <label for="exampleInputPassword1" class="form-label"
+            <label for="exampleInputPassword1" class="form-label" 
               >Customer Name:</label
             >
-            <input type="text" class="form-control" id="customer-name" />
+            <input type="text" class="form-control" id="customer-name" required/>
           </div>
           <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
             <label for="exampleInputPassword1" class="form-label">Date:</label>
-            <input type="datetime-local" class="form-control" id="issue-date" />
+            <input type="datetime-local" class="form-control" id="issue-date" required/>
           </div>
         </div>
         <hr />
@@ -71,6 +73,7 @@
               class="form-control"
               id="perimeter"
               aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
@@ -82,6 +85,7 @@
               class="form-control"
               id="num_of_lines"
               aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
@@ -93,6 +97,7 @@
               class="form-control"
               id="num_of_corners"
               aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
@@ -104,6 +109,7 @@
               class="form-control"
               id="num_of_gates"
               aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
@@ -112,81 +118,291 @@
             >
             <select class="form-select" id="type_of_fence">
               <option selected>Choose...</option>
-              <option value="1">Galvanized Fencing wires 2.5mm</option>
-              <option value="2">Galvanized Fencing wires 2.0mm</option>
+              <option value="2.5mm">Galvanized Fencing wires 2.5mm</option>
+              <option value="2.0mm">Galvanized Fencing wires 2.0mm</option>
             </select>
           </div>
         </div>
         <hr />
-        <div class="btn btn-success" onclick="dataValidation()">Add Data</div>
+        <div class="btn btn-success" onclick="validateForm() ">Add Data</div>
       </div>
 
       <!------------------- show-data -------------------->
       <div
         class="jumbotron w-100 shadow my-3 p-4 justify-content-center rounded-2"
       >
-        <div class="detail_input_header">
-          <h3 class="text-start">Add Additional Details</h3>
-          <hr />
-        </div>
-        <!-- =================================================================== -->
-        <div class="jumbotron shadow my-3 p-4 justify-content-center rounded-2">
+        <div
+          class="item_main_header d-flex align-items-center justify-content-between"
+        >
           <div
-            class="item_name col-12 col-lg-6 mb-2 fs-3 d-flex justify-content-start"
+            class="additioanl_heder d-flex justify-content-start col-lg-10 col-md-10 col-sm-10 col-10"
           >
-            <h3 class="fs-6 text-success text-start">
-              Galvanized Fencing Wires
-            </h3>
+            <h3 class="text-start">Items</h3>
           </div>
-          <div class="item row">
-            <hr />
-            <div
-              class="col-9 col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-start"
-            >
-              <div
-                class="col-12 item_quntity d-flex justify-content-between border-bottom mb-4"
-              >
-                <h3 class="fs-6">Item Quntity</h3>
-                <h3 class="fs-6">50</h3>
+          <div
+            class="btn-outer col-lg-2 col-md-2 col-sm-2 col-2 d-flex justify-content-end"
+          >
+            <button type="button" class="btn btn-primary m-1 justify-content-end" data-bs-toggle="modal" data-bs-target="#addNewItemModal">
+              <i class="bi bi-plus-circle"></i>
+            </button>
+          </div>
+        </div>
+        <hr>
+        <!-- Add New Items Modal -->
+        <div
+          class="modal fade"
+          id="addNewItemModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Add New Items
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
-              <div
-                class="col-12 item_amount d-flex justify-content-between border-bottom mb-4"
-              >
-                <h3 class="fs-6">Item Amount</h3>
-                <h3 class="fs-6">500.00</h3>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                  Add Item
+                </button>
               </div>
             </div>
-            <div
-              class="col-3 col-lg-6 col-md-4 col-sm-4 d-flex flex-column px-4"
-            >
-              <div class="btn-outer">
-                <button class="btn btn-primary m-1">
+          </div>
+        </div>
+        <!-- Add New Items Modal -->
+
+
+        <div class="add_item_container w-100 d-flex flex-wrap justify-content-center">
+          <!-- ================================ item 01=================================== -->
+          <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+            <div class="item_name_title">
+              <h3 class="fs-5 text-success text-start">Galvanized Fencing Wires</h3>
+              <hr>
+            </div>
+            <div class="item_name_body d-flex justify-content-center">
+                <img class="img-thumbnail" src="assets\images\galvanized_fencing_wires.png" alt="" srcset="">
+                <hr>
+            </div>
+            <div class="add_btn d-flex justify-content-end align-items-center mt-3">
+              <button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal_01">
+                <i class="bi bi-plus-circle"></i>
+              </button>
+            </div>
+          </div>
+        <!-- Add Product Modal -->
+        <div
+          class="modal fade"
+          id="addItemModal_01"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Galvanized Fencing Wires
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Price:</label>
+                  <input type="number" class="form-control" id="galvanized-wire-price" required>
+                </div>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Additional required:</label>
+                  <input type="number" class="form-control" id="galvanized-wire-addtional">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="addItemModal_01_btn">
+                  Add Items
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add Product Modal -->
+        <!-- ==================================== item 01=============================== -->
+
+        <!-- ================================ item 02=================================== -->
+          <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+            <div class="item_name_title">
+              <h3 class="fs-5 text-success text-start">Ceramic Reel Insulators</h3>
+              <hr>
+            </div>
+            <div class="item_name_body d-flex justify-content-center">
+                <img class="img-thumbnail" src="assets\images\ceramic_reel_insulators.png" alt="" srcset="">
+                <hr>
+            </div>
+            <div class="add_btn d-flex justify-content-end align-items-center mt-3">
+              <button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                <i class="bi bi-plus-circle"></i>
+              </button>
+            </div>
+          </div>
+        <!-- Add Product Modal -->
+        <div
+          class="modal fade"
+          id="addItemModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Ceramic Reel Insulators
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                  Add Items
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add Product Modal -->
+        <!-- ==================================== item 02=============================== -->
+
+        <!-- ================================ item 03=================================== -->
+          <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+            <div class="item_name_title">
+              <h3 class="fs-6 text-success text-start">Plastic Screw Reel Insulators</h3>
+              <hr>
+            </div>
+            <div class="item_name_body d-flex justify-content-center">
+                <img class="img-thumbnail" src="assets\images\plastic_screw_reel_insulators.jpg" alt="" srcset="">
+                <hr>
+            </div>
+              <div class="add_btn d-flex justify-content-end align-items-center mt-5">
+                <button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
                   <i class="bi bi-plus-circle"></i>
                 </button>
               </div>
-              <div class="btn-outer">
-                <button class="btn btn-warning m-1">
-                  <i class="bi bi-pencil"></i>
-                </button>
+          </div>
+        <!-- Add Product Modal -->
+        <div
+          class="modal fade"
+          id="addItemModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Plastic Screw Reel Insulators
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
-              <div class="btn-outer">
-                <button class="btn btn-danger m-1">
-                  <i class="bi bi-trash3"></i>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                  Add Items
                 </button>
               </div>
             </div>
           </div>
         </div>
+        <!-- Add Product Modal -->
+        <!-- ==================================== item 03=============================== -->
+        </div>
       </div>
       <!------------------- show-data -------------------->
+
+
+
+      <!---------------------------- Add Items ------------------->
+      <div
+      class="jumbotron w-100 shadow my-3 p-4 justify-content-center rounded-2"
+    >
+      <div
+        class="detail_input_header d-flex align-items-center justify-content-between"
+      >
+        <div
+          class="additioanl_heder d-flex justify-content-start col-lg-10 col-md-10 col-sm-10 col-10"
+        >
+          <h3 class="text-start">Add Items</h3>
+        </div>
+      </div>
+      <hr>
+      <!-- =================================================================== -->
+      <div class="add_item_container w-100 d-flex flex-wrap justify-content-start">
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">Galvanized Fencing Wires</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">10.00</h3>
+            </div>
+              <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+                <h3 class="fs-6">Item Quntity</h3>
+                <h3 class="fs-6">50</h3>
+              </div>
+              <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+                <h3 class="fs-6">Item Amount</h3>
+                <h3 class="fs-6 text-success">500.00</h3>
+              </div>
+              <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---------------------------- Add Items ------------------->
     </div>
 
     <footer></footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+    <!-- jQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Bootstrap Bundle (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
     <script src="main.js"></script>
   </body>
 </html>
