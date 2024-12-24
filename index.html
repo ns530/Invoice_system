@@ -33,99 +33,59 @@
         <h1 class="text-center">Cost Estimator</h1>
       </div>
 
-      <div class="jumbotron w-100 shadow my-3 p-4 rounded-2">
-        <div class="detail_input_header">
-          <h3 class="text-start text-success">Customer Details</h3>
+      <form action="" id="user-data-form">
+        <div class="jumbotron w-100 shadow my-3 p-4 rounded-2">
+          <div class="detail_input_header">
+            <h3 class="text-start text-success">Customer Details</h3>
+            <hr />
+          </div>
+          <div class="row">
+            <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
+              <label for="exampleInputEmail1" class="form-label">Customer No:</label>
+              <input type="number" class="form-control" id="customer-num" aria-describedby="emailHelp" required />
+            </div>
+            <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
+              <label for="exampleInputPassword1" class="form-label">Customer Name:</label>
+              <input type="text" class="form-control" id="customer-name" required />
+            </div>
+            <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
+              <label for="exampleInputPassword1" class="form-label">Date:</label>
+              <input type="datetime-local" class="form-control" id="issue-date" required />
+            </div>
+          </div>
           <hr />
+          <div class="row col-lg-6 col-md-12 col-12">
+            <div class="mb-3 col-lg-12 col-md-8 col-sm-12">
+              <label for="exampleInputEmail1" class="form-label">Perimeter(feet):</label>
+              <input type="number" class="form-control" id="perimeter" aria-describedby="emailHelp" required />
+            </div>
+            <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
+              <label for="exampleInputEmail1" class="form-label">Number Of Lines:</label>
+              <input type="number" class="form-control" id="num_of_lines" aria-describedby="emailHelp" required />
+            </div>
+            <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
+              <label for="exampleInputEmail1" class="form-label">Number Of Corners:</label>
+              <input type="number" class="form-control" id="num_of_corners" aria-describedby="emailHelp" required />
+            </div>
+            <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
+              <label for="exampleInputEmail1" class="form-label">Number Of Gates:</label>
+              <input type="number" class="form-control" id="num_of_gates" aria-describedby="emailHelp" required />
+            </div>
+            <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
+              <label class="form-label" for="autoSizingSelect">Type Of Fence</label>
+              <select class="form-select" id="type_of_fence">
+                <option selected>Choose...</option>
+                <option value="2.5mm">Galvanized Fencing wires 2.5mm</option>
+                <option value="2.0mm">Galvanized Fencing wires 2.0mm</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+          <div class="btn btn-success" id="add-user-date" onclick="validateForm()">Add Data</div>
         </div>
-        <div class="row">
-          <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
-            <label for="exampleInputEmail1" class="form-label"
-              >Customer No:</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="customer-num"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
-          <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
-            <label for="exampleInputPassword1" class="form-label" 
-              >Customer Name:</label
-            >
-            <input type="text" class="form-control" id="customer-name" required/>
-          </div>
-          <div class="mb-3 col-12 col-lg-4 col-md-10 col-sm-12">
-            <label for="exampleInputPassword1" class="form-label">Date:</label>
-            <input type="datetime-local" class="form-control" id="issue-date" required/>
-          </div>
-        </div>
-        <hr />
-        <div class="row col-lg-6 col-md-12 col-12">
-          <div class="mb-3 col-lg-12 col-md-8 col-sm-12">
-            <label for="exampleInputEmail1" class="form-label"
-              >Perimeter(feet):</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="perimeter"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
-          <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
-            <label for="exampleInputEmail1" class="form-label"
-              >Number Of Lines:</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="num_of_lines"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
-          <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
-            <label for="exampleInputEmail1" class="form-label"
-              >Number Of Corners:</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="num_of_corners"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
-          <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
-            <label for="exampleInputEmail1" class="form-label"
-              >Number Of Gates:</label
-            >
-            <input
-              type="number"
-              class="form-control"
-              id="num_of_gates"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
-          <div class="mb-3 col col-lg-12 col-md-8 col-sm-12 col-12">
-            <label class="form-label" for="autoSizingSelect"
-              >Type Of Fence</label
-            >
-            <select class="form-select" id="type_of_fence">
-              <option selected>Choose...</option>
-              <option value="2.5mm">Galvanized Fencing wires 2.5mm</option>
-              <option value="2.0mm">Galvanized Fencing wires 2.0mm</option>
-            </select>
-          </div>
-        </div>
-        <hr />
-        <div class="btn btn-success" onclick="validateForm() ">Add Data</div>
-      </div>
+      </form>
+    
+      <div id="user-data-container" class="container mt-4"></div>
 
       <!------------------- show-data -------------------->
       <div
@@ -280,10 +240,21 @@
                 ></button>
               </div>
               <div class="modal-body">
-                ...
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Price:</label>
+                  <input type="number" class="form-control" id="ceramic-reel-price" required>
+                </div>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Defalt Value:</label>
+                  <input type="number" class="form-control" id="ceramic-reel-defalt-value" required>
+                </div>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Additional required:</label>
+                  <input type="number" class="form-control" id="ceramic-reel-addtional">
+                </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success" id="addItemModal_02_btn">
                   Add Items
                 </button>
               </div>
@@ -350,7 +321,7 @@
 
 
       <!---------------------------- Add Items ------------------->
-      <div class="jumbotron w-100 shadow my-3 p-4 justify-content-center rounded-2" id="add-items">
+      <div class="jumbotron w-100 shadow my-3 p-4 justify-content-center rounded-2">
       <div class="detail_input_header d-flex align-items-center justify-content-between">
         <div class="additioanl_heder d-flex justify-content-start col-lg-10 col-md-10 col-sm-10 col-10">
           <h3 class="text-start">Add Items</h3>
@@ -358,8 +329,8 @@
       </div>
       <hr>
       <!-- =================================================================== -->
-      <!-- <div class="add_item_container w-100 d-flex flex-wrap justify-content-start">
-        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+       <div class="" id="add-items">
+        <!-- <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
           <div class="item_name_title">
             <h3 class="fs-5 text-success text-start">Galvanized Fencing Wires</h3>
             <hr>
@@ -383,8 +354,8 @@
             <button class="btn btn-warning mx-1"><i class="bi bi-pencil"></i></button>
             <button class="btn btn-danger mx-1"><i class="bi bi-trash3"></i></button>
           </div>
-        </div>
-      </div> -->
+        </div> -->
+    </div>
     </div>
     <!---------------------------- Add Items ------------------->
     </div>

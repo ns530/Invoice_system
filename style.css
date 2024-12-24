@@ -23,3 +23,7 @@ footer{
     height: 30vh;
     background-color: var(--header-background_color);
 }
+
+.box-product{
+    width: 350px !important;
+}
