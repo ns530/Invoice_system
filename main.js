@@ -291,10 +291,381 @@ const ceramicReelHandler = {
   editIndex: null
 };
 
-// Event Listeners
+
+// ================ Plastic Screw Reel Insulators ================
+const plasticScrewReelHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('plasticScrewReelItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('plasticScrewReelItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('plasticScrewReelItems')) || [];
+    const addItemsDiv = document.getElementById('plastic-screw-reel-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.plasticScrewReelPrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.plasticScrewReelQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.plasticScrewReelAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="plasticScrewReelHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="plasticScrewReelHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('plasticScrewReelItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('plasticScrewReelItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('plasticScrewReelItems')) || [];
+    const item = items[index];
+
+    document.getElementById('plastic-screw-reel-price').value = item.plasticScrewReelPrice;
+    document.getElementById('plastic-screw-reel-defalt-value').value = item.plasticScrewReelDefaultValue;
+    document.getElementById('plastic-screw-reel-addtional').value = item.plasticScrewReelAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_03'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+
+// ================ Ceramic Bullnose Insulators ================
+const ceramicBullnoseHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('ceramicBullnoseItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('ceramicBullnoseItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('ceramicBullnoseItems')) || [];
+    const addItemsDiv = document.getElementById('ceramic-bullnose-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.ceramicBullnosePrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.ceramicBullnoseQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.ceramicBullnoseAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="ceramicBullnoseHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="ceramicBullnoseHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('ceramicBullnoseItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('ceramicBullnoseItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('ceramicBullnoseItems')) || [];
+    const item = items[index];
+
+    document.getElementById('ceramic-bullnose-price').value = item.ceramicBullnosePrice;
+    document.getElementById('ceramic-bullnose-addtional').value = item.ceramicBullnoseAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_04'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+// ================ Wire Tighterners ================
+const wireTighternersHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('wireTighternersItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('wireTighternersItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('wireTighternersItems')) || [];
+    const addItemsDiv = document.getElementById('wire-tighterners-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.wireTighternersPrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.wireTighternersQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.wireTighternersAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="wireTighternersHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="wireTighternersHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('wireTighternersItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('wireTighternersItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('wireTighternersItems')) || [];
+    const item = items[index];
+
+    document.getElementById('wire-tighterners-price').value = item.wireTighternersPrice;
+    document.getElementById('wire-tighterners-addtional').value = item.wireTighternersAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_05'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+
+// ================ Gate Springs Sets ================
+const gateSpringsHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('gateSpringsItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('gateSpringsItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('gateSpringsItems')) || [];
+    const addItemsDiv = document.getElementById('gate-springs-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.gateSpringsPrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.gateSpringsQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.gateSpringsAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="gateSpringsHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="gateSpringsHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('gateSpringsItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('gateSpringsItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('gateSpringsItems')) || [];
+    const item = items[index];
+
+    document.getElementById('gate-springs-sets-price').value = item.gateSpringsPrice;
+    // document.getElementById('wire-tighterners-addtional').value = item.wireTighternersAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_06'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+// ================ Warning Sign Bords ================
+const warningSignBordsHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('warningSignBordsItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('warningSignBordsItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('warningSignBordsItems')) || [];
+    const addItemsDiv = document.getElementById('warning-sign-bords-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.warningSignBordsPrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.warningSignBordsQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.warningSignBordsAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="warningSignBordsHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="warningSignBordsHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('warningSignBordsItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('warningSignBordsItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('warningSignBordsItems')) || [];
+    const item = items[index];
+
+    document.getElementById('warning-sign-bords-price').value = item.warningSignBordsPrice;
+    // document.getElementById('wire-tighterners-addtional').value = item.wireTighternersAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_07'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+// Event Listeners//////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', () => {
   galvanizedWireHandler.loadItems();
   ceramicReelHandler.loadItems();
+  plasticScrewReelHandler.loadItems();
+  ceramicBullnoseHandler.loadItems();
+  wireTighternersHandler.loadItems();
+  gateSpringsHandler.loadItems();
+  warningSignBordsHandler.loadItems();
 });
 
 //////////////////////////////////////////////Galvanized Fencing Wires////////////////////////////////////////////////////////
@@ -390,4 +761,220 @@ document.getElementById('addItemModal_02_btn').addEventListener('click', () => {
 });
 ////////////////////////////////////////////////Ceramic Reel Insulators//////////////////////////////////////////////////////
 
+////////////////////////////////////////////////Plastic Screw Reel Insulators//////////////////////////////////////////////////////
+
+document.getElementById('addItemModal_03_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('plastic-screw-reel-price').value);
+  const defaultValue = parseFloat(document.getElementById('plastic-screw-reel-defalt-value').value);
+  const additional = parseInt(document.getElementById('plastic-screw-reel-addtional').value, 10);
+
+  if (!price || !defaultValue || !additional || isNaN(price) || isNaN(defaultValue) || isNaN(additional)) {
+    alert('Please enter valid values');
+    return;
+  }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const perimeter = parseInt(latestData.perimeter, 10);
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+
+  const quantity = ((perimeter / defaultValue) * numOfLines) + additional;
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Plastic Screw Reel Insulators',
+    plasticScrewReelPrice: price,
+    plasticScrewReelQuantity: quantity,
+    plasticScrewReelAmount: amount,
+    plasticScrewReelDefaultValue: defaultValue,
+    plasticScrewReelAdditional: additional
+  };
+
+  plasticScrewReelHandler.saveItem(item);
+  plasticScrewReelHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('plastic-screw-reel-price').value = '';
+  document.getElementById('plastic-screw-reel-defalt-value').value = '';
+  document.getElementById('plastic-screw-reel-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_03')).hide();
+});
+
+////////////////////////////////////////////////Plastic Screw Reel Insulators//////////////////////////////////////////////////////
+
+////////////////////////////////////////////////Ceramic Bullnose Insulators//////////////////////////////////////////////////////
+document.getElementById('addItemModal_04_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('ceramic-bullnose-price').value);
+  const additional = parseInt(document.getElementById('ceramic-bullnose-addtional').value, 10);
+
+  if (!price || isNaN(price) || !additional || isNaN(additional)) {
+    alert('Please enter valid values');
+    return;
+  }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const numOfCorners = parseInt(latestData.numOfCorners, 10);
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+  const numOfGates = parseInt(latestData.numOfGates, 10);
+
+  // const quantity = ((perimeter / defaultValue) * numOfLines) + additional;
+  const quantity =  (numOfCorners+(numOfGates*2) * numOfLines) + additional;
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Ceramic Bullnose Insulators',
+    ceramicBullnosePrice: price,
+    ceramicBullnoseQuantity: quantity,
+    ceramicBullnoseAmount: amount,
+    ceramicBullnoseAdditional: additional
+  };
+
+  ceramicBullnoseHandler.saveItem(item);
+  ceramicBullnoseHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('ceramic-bullnose-price').value = '';
+  document.getElementById('ceramic-bullnose-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_04')).hide();
+});
+////////////////////////////////////////////////Ceramic Bullnose Insulators//////////////////////////////////////////////////////
+
+////////////////////////////////////////////////Wire Tighterners//////////////////////////////////////////////////////
+document.getElementById('addItemModal_05_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('wire-tighterners-price').value);
+  const additional = parseInt(document.getElementById('wire-tighterners-addtional').value, 10);
+
+  if (!price || isNaN(price) || !additional || isNaN(additional)) {
+    alert('Please enter valid values');
+    return;
+  }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const numOfCorners = parseInt(latestData.numOfCorners, 10);
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+  const numOfGates = parseInt(latestData.numOfGates, 10);
+
+  const quantity = (((numOfCorners - 1) * numOfLines) + (numOfGates * numOfLines * 2)) + additional ;
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Wire Tighterners',
+    wireTighternersPrice: price,
+    wireTighternersQuantity: quantity,
+    wireTighternersAmount: amount,
+    wireTighternersAdditional: additional
+  };
+
+  wireTighternersHandler.saveItem(item);
+  wireTighternersHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('wire-tighterners-price').value = '';
+  document.getElementById('wire-tighterners-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_05')).hide();
+});
+
+////////////////////////////////////////////////Wire Tighterners//////////////////////////////////////////////////////
+
+////////////////////////////////////////////////Gate Springs Sets//////////////////////////////////////////////////////
+
+document.getElementById('addItemModal_06_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('gate-springs-sets-price').value);
+  // const additional = parseInt(document.getElementById('wire-tighterners-addtional').value, 10);
+
+  if (!price || isNaN(price)) {
+    alert('Please enter valid values');
+    return;
+  }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+  const numOfGates = parseInt(latestData.numOfGates, 10);
+
+  const quantity = numOfGates * numOfLines;
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Gate Springs Sets',
+    gateSpringsPrice: price,
+    gateSpringsQuantity: quantity,
+    gateSpringsAmount: amount,
+    // wireTighternersAdditional: additional
+  };
+
+  gateSpringsHandler.saveItem(item);
+  gateSpringsHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('gate-springs-sets-price').value = '';
+  // document.getElementById('wire-tighterners-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_06')).hide();
+});
+
+////////////////////////////////////////////////Gate Springs Sets//////////////////////////////////////////////////////
+
+////////////////////////////////////////////////Warning Sign Bords//////////////////////////////////////////////////////
+
+document.getElementById('addItemModal_07_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('warning-sign-bords-price').value);
+  // const additional = parseInt(document.getElementById('wire-tighterners-addtional').value, 10);
+
+  if (!price || isNaN(price)) {
+    alert('Please enter valid values');
+    return;
+  }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const perimeter = parseInt(latestData.perimeter, 10);
+
+  const quantity = (perimeter / 820);
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Warning Sign Bords',
+    warningSignBordsPrice: price,
+    warningSignBordsQuantity: quantity,
+    warningSignBordsAmount: amount,
+    // wireTighternersAdditional: additional
+  };
+
+  warningSignBordsHandler.saveItem(item);
+  warningSignBordsHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('warning-sign-bords-price').value = '';
+  // document.getElementById('wire-tighterners-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_07')).hide();
+});
+
+////////////////////////////////////////////////Warning Sign Bords//////////////////////////////////////////////////////
 
