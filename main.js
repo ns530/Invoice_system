@@ -141,193 +141,253 @@ document.addEventListener("DOMContentLoaded", renderUserData);
 
 
 //////////////////////////////////////////////Galvanized Fencing Wires////////////////////////////////////////////////////////
+// ================ Galvanized Fencing Wires Handler ================
+const galvanizedWireHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('galvanizedWireItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('galvanizedWireItems', JSON.stringify(items));
+  },
 
-let galvanizeWirelength;
-let amountOfgalvanizeWire;
-let addItemDiv = document.getElementById("add-items");
-let galvanizeWireCounter = 0;
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('galvanizedWireItems')) || [];
+    const addItemsDiv = document.getElementById('galvanized-wire-items');
+    addItemsDiv.innerHTML = '';
 
-document.getElementById("addItemModal_01_btn").addEventListener("click", () => {
-  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
-   console.log(existingData);
- 
-   if (existingData.length === 0) {
-     console.log("No data to edit or process.");
-   } else {
-     console.log("Data to edit:", existingData[0]['customerName']);
-     galvanizeWireCla(
-      existingData[0]['perimeter'],
-      existingData[0]['numOfLines'],
-      existingData[0]['typeOfFence'],
-    );
-   }
-    return true;
-  
-});
-
-function galvanizeWireCla(new_perimeter, new_numOfLines, new_typeOfFence) {
-  const galvanizeWirePrice =
-    parseInt(document.getElementById("galvanized-wire-price").value.trim()) ||
-    0;
-  const galvanizeWireAdditional =
-    parseInt(
-      document.getElementById("galvanized-wire-addtional").value.trim()
-    ) || 0;
-
-  // Parse input parameters
-  new_perimeter = parseInt(new_perimeter) || 0;
-  new_numOfLines = parseInt(new_numOfLines) || 0;
-
-  if (new_typeOfFence === "2.5mm") {
-    galvanizeWirelength =
-      (new_perimeter * new_numOfLines) / 76 + galvanizeWireAdditional;
-    console.log(galvanizeWirelength);
-  } else if (new_typeOfFence === "2.00mm") {
-    galvanizeWirelength =
-      (new_perimeter * new_numOfLines) / 110 + galvanizeWireAdditional;
-  }
-
-  amountOfgalvanizeWire = galvanizeWirelength * galvanizeWirePrice;
-
-  
-
-  let newDiv = document.createElement("div");
-  newDiv.className = "box-product border justify-content-center";
-  newDiv.innerHTML += `
-        <div class="item_name w-100 jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
           <div class="item_name_title">
-            <h3 class="fs-5 text-success text-start">Galvanized Fencing Wires</h3>
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
             <hr>
           </div>
           <div class="item_name_body">
             <div class="item_price my-3 d-flex justify-content-between align-items-center">
               <h3 class="fs-6">Item Price</h3>
-              <h3 class="fs-6">${galvanizeWirePrice}</h3>
+              <h3 class="fs-6">${item.galvanizedWirePrice.toFixed(2)}</h3>
             </div>
-              <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
-                <h3 class="fs-6">Item Quntity</h3>
-                <h3 class="fs-6">${galvanizeWirelength.toFixed(2)}</h3>
-              </div>
-              <div class="item_amount my-3 d-flex justify-content-between align-items-center">
-                <h3 class="fs-6">Item Amount</h3>
-                <h3 class="fs-6 text-success">${Math.round(amountOfgalvanizeWire) + ".00"}</h3>
-              </div>
-              <hr>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.galvanizedWireLength.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.galvanizedWireAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
           </div>
           <div class="item_footer d-flex justify-content-end">
-            <button class="btn btn-warning mx-1"><i class="bi bi-pencil"></i></button>
-            <button class="btn btn-danger mx-1" id="remove_glfewi"><i class="bi bi-trash3"></i></button>
+            <button class="btn btn-warning mx-1" onclick="galvanizedWireHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="galvanizedWireHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
           </div>
         </div>
-    `;
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
 
-  if(galvanizeWireCounter < 1) {
-    addItemDiv.appendChild(newDiv);
-    galvanizeWireCounter++ ;
-  }
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('galvanizedWireItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('galvanizedWireItems', JSON.stringify(items));
+    this.loadItems();
+  },
 
-  // Add event listener for dynamically created "remove_glfewi" button
-newDiv.querySelector("#remove_glfewi").addEventListener("click", () => {
-  if (addItemDiv.children.length > 0) {
-    addItemDiv.removeChild(newDiv);
-    
-    galvanizeWireCounter-- ;
-  }
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('galvanizedWireItems')) || [];
+    const item = items[index];
+
+    if (!item) {
+      console.error("Item not found at index:", index);
+      return;
+    }
+
+    document.getElementById('galvanized-wire-price').value = item.galvanizedWirePrice;
+    document.getElementById('galvanized-wire-addtional').value = item.galvanizedWireAddtional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_01'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+// ================ Ceramic Reel Insulators Handler ================
+const ceramicReelHandler = {
+  saveItem(item) {
+    const items = JSON.parse(localStorage.getItem('ceramicReelItems')) || [];
+    if (this.editIndex !== null) {
+      items[this.editIndex] = item;
+      this.editIndex = null;
+    } else {
+      items.push(item);
+    }
+    localStorage.setItem('ceramicReelItems', JSON.stringify(items));
+  },
+
+  loadItems() {
+    const items = JSON.parse(localStorage.getItem('ceramicReelItems')) || [];
+    const addItemsDiv = document.getElementById('ceramic-reel-items');
+    addItemsDiv.innerHTML = '';
+
+    items.forEach((item, index) => {
+      const itemCard = `
+        <div class="item_name jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
+          <div class="item_name_title">
+            <h3 class="fs-5 text-success text-start">${item.name}</h3>
+            <hr>
+          </div>
+          <div class="item_name_body">
+            <div class="item_price my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Price</h3>
+              <h3 class="fs-6">${item.ceramicReelPrice.toFixed(2)}</h3>
+            </div>
+            <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Quantity</h3>
+              <h3 class="fs-6">${item.ceramicReelQuantity.toFixed(2)}</h3>
+            </div>
+            <div class="item_amount my-3 d-flex justify-content-between align-items-center">
+              <h3 class="fs-6">Item Amount</h3>
+              <h3 class="fs-6 text-success">${item.ceramicReelAmount.toFixed(2)}</h3>
+            </div>
+            <hr>
+          </div>
+          <div class="item_footer d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" onclick="ceramicReelHandler.editItem(${index})"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-danger mx-1" onclick="ceramicReelHandler.deleteItem(${index})"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      `;
+      addItemsDiv.insertAdjacentHTML('beforeend', itemCard);
+    });
+  },
+
+  deleteItem(index) {
+    const items = JSON.parse(localStorage.getItem('ceramicReelItems')) || [];
+    items.splice(index, 1);
+    localStorage.setItem('ceramicReelItems', JSON.stringify(items));
+    this.loadItems();
+  },
+
+  editItem(index) {
+    const items = JSON.parse(localStorage.getItem('ceramicReelItems')) || [];
+    const item = items[index];
+
+    document.getElementById('ceramic-reel-price').value = item.ceramicReelPrice;
+    document.getElementById('ceramic-reel-defalt-value').value = item.ceramicReelDefaultValue;
+    document.getElementById('ceramic-reel-addtional').value = item.ceramicReelAdditional || '';
+
+    this.editIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal_02'));
+    modal.show();
+  },
+
+  editIndex: null
+};
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  galvanizedWireHandler.loadItems();
+  ceramicReelHandler.loadItems();
 });
 
+//////////////////////////////////////////////Galvanized Fencing Wires////////////////////////////////////////////////////////
+document.getElementById('addItemModal_01_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('galvanized-wire-price').value);
+  const additional = parseInt(document.getElementById('galvanized-wire-addtional').value, 10);
 
-}
+  if (!price || isNaN(price) || !additional || isNaN(additional)) {
+    alert('Please enter valid values');
+    return;
+  }
 
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
 
-////////////////////////////////////////////////Galvanized Fencing Wires//////////////////////////////////////////////////////
+  const latestData = existingData[existingData.length - 1];
+  const perimeter = parseInt(latestData.perimeter, 10);
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+  const typeOfFence = latestData.typeOfFence;
+
+  let length = 0;
+  if (typeOfFence === "2.5mm") {
+    length = (perimeter * numOfLines) / 76 + additional;
+  } else if (typeOfFence === "2.00mm") {
+    length = (perimeter * numOfLines) / 110 + additional;
+  }
+
+  const amount = price * length;
+  
+  const item = {
+    name: 'Galvanized Fencing Wires',
+    galvanizedWirePrice: price,
+    galvanizedWireLength: length,
+    galvanizedWireAmount: amount,
+    galvanizedWireAddtional: additional
+  };
+
+  galvanizedWireHandler.saveItem(item);
+  galvanizedWireHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('galvanized-wire-price').value = '';
+  document.getElementById('galvanized-wire-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_01')).hide();
+});
+
 
 ////////////////////////////////////////////////Ceramic Reel Insulators//////////////////////////////////////////////////////
-let ceramicReelCounter = 0;
+// Ceramic Reel Add/Edit Button Handler
+document.getElementById('addItemModal_02_btn').addEventListener('click', () => {
+  const price = parseFloat(document.getElementById('ceramic-reel-price').value);
+  const defaultValue = parseFloat(document.getElementById('ceramic-reel-defalt-value').value);
+  const additional = parseInt(document.getElementById('ceramic-reel-addtional').value, 10);
 
-document.getElementById("addItemModal_02_btn").addEventListener("click", () => {
-  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
-   console.log(existingData);
- 
-   if (existingData.length === 0) {
-     console.log("No data to edit or process.");
-   } else {
-     console.log("Data to edit:", existingData[0]['customerName']);
-     ceramicReelCal(
-      existingData[0]['perimeter'],
-      existingData[0]['numOfLines'],
-    );
-   }
-    return true;
-  
-});
-
-function ceramicReelCal(new_perimeter, new_numOfLines,) {
-  const ceramicReelPrice = parseInt(document.getElementById("ceramic-reel-price").value.trim()) || 0;
-const ceramicReelAdditional =
-  parseInt(
-    document.getElementById("ceramic-reel-addtional").value.trim()
-  ) || 0;
-
-const ceramicReelDefaltValue =
-  parseInt(
-    document.getElementById("ceramic-reel-defalt-value").value.trim()
-  ) 
-
-new_perimeter = parseInt(new_perimeter) || 0;
-new_numOfLines = parseInt(new_numOfLines) || 0;
-
-let ceramiReelQuantity = ((new_perimeter/ceramicReelDefaltValue) * new_numOfLines) + ceramicReelAdditional;
-
-let amountOfCeramicReels = ceramiReelQuantity * ceramicReelPrice;
-
-
-let newDiv = document.createElement("div");
-newDiv.className = "box-product border justify-content-center d-flex flex-wrap";
-newDiv.innerHTML += `
-      <div class="item_name w-100 jumbotron col-12 col-lg-3 shadow m-3 p-4 justify-content-start rounded-2">
-          <div class="item_name_title">
-            <h3 class="fs-5 text-success text-start">Ceramic Reel Insulators</h3>
-            <hr>
-          </div>
-          <div class="item_name_body">
-            <div class="item_price my-3 d-flex justify-content-between align-items-center">
-              <h3 class="fs-6">Item Price</h3>
-              <h3 class="fs-6">${ceramicReelPrice}</h3>
-            </div>
-              <div class="item_quntity my-3 d-flex justify-content-between align-items-center">
-                <h3 class="fs-6">Item Quntity</h3>
-                <h3 class="fs-6">${Math.round(ceramiReelQuantity) + 1}</h3>
-              </div>
-              <div class="item_amount my-3 d-flex justify-content-between align-items-center">
-                <h3 class="fs-6">Item Amount</h3>
-                <h3 class="fs-6 text-success">${Math.round(amountOfCeramicReels) + ".00"}</h3>
-              </div>
-              <hr>
-          </div>
-          <div class="item_footer d-flex justify-content-end">
-            <button class="btn btn-warning mx-1"><i class="bi bi-pencil"></i></button>
-            <button class="btn btn-danger mx-1" id="remove_ceramic_reel"><i class="bi bi-trash3"></i></button>
-          </div>
-        </div>
-  `;
-
-if(ceramicReelCounter < 1) {
-  addItemDiv.appendChild(newDiv);
-  ceramicReelCounter++ ;
-}
-
-newDiv.querySelector("#remove_ceramic_reel").addEventListener("click", () => {
-  if (addItemDiv.children.length > 0) {
-    addItemDiv.removeChild(newDiv);
-    
-    ceramicReelCounter-- ;
+  if (!price || !defaultValue || !additional || isNaN(price) || isNaN(defaultValue) || isNaN(additional)) {
+    alert('Please enter valid values');
+    return;
   }
+
+  const existingData = JSON.parse(localStorage.getItem("userData")) || [];
+  if (existingData.length === 0) {
+    alert("Please enter fence details first");
+    return;
+  }
+
+  const latestData = existingData[existingData.length - 1];
+  const perimeter = parseInt(latestData.perimeter, 10);
+  const numOfLines = parseInt(latestData.numOfLines, 10);
+
+  const quantity = ((perimeter / defaultValue) * numOfLines) + additional;
+  const amount = price * quantity;
+
+  const item = {
+    name: 'Ceramic Reel Insulators',
+    ceramicReelPrice: price,
+    ceramicReelQuantity: quantity,
+    ceramicReelAmount: amount,
+    ceramicReelDefaultValue: defaultValue,
+    ceramicReelAdditional: additional
+  };
+
+  ceramicReelHandler.saveItem(item);
+  ceramicReelHandler.loadItems();
+
+  // Reset and close
+  document.getElementById('ceramic-reel-price').value = '';
+  document.getElementById('ceramic-reel-defalt-value').value = '';
+  document.getElementById('ceramic-reel-addtional').value = '';
+  bootstrap.Modal.getInstance(document.getElementById('addItemModal_02')).hide();
 });
-
-}
-
-
-
 ////////////////////////////////////////////////Ceramic Reel Insulators//////////////////////////////////////////////////////
 
 
